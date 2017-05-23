@@ -8,7 +8,9 @@ var path = require('path');
 app.use(cors());
 
 app.get('/api/list/:path', function (req, res) {
+    console.log(req);
     fs.readdir('client/' + req.params.path, function(err, files){
+        console.log(files);
         res.send(parse(files));
     });
 });
