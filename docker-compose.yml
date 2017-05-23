@@ -1,0 +1,19 @@
+node:
+  build: ./app
+  volumes:
+    - "./app:/src/app"
+  ports:
+    - "3030:3000"
+  command: nodemon -L app/bin/www.js
+
+nginx:
+  restart: always
+  build: ./nginx/
+  ports:
+    - "80:80"
+  volumes:
+    - /www/public
+  volumes_from:
+    - node
+  links:
+- node:node
