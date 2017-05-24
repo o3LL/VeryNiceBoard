@@ -8,4 +8,3 @@ MAINTAINER GRAND Léo
 # COPY nginx.conf /etc/nginx/nginx.conf
 COPY ./app.conf /etc/nginx/conf.d/default.conf
 RUN mkdir /srv/http
-COPY ./build /srv/http
