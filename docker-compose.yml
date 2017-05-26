@@ -1,11 +1,6 @@
 version: '2'
 services:
 
-    node:
-        build: ./node
-        ports:
-            - "3030:3000"
-
     web:
         build: ./nginx
         ports:
