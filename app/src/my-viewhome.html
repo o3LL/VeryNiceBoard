@@ -27,14 +27,14 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
     <iron-ajax
       auto
-      url="http://localhost:3000/api/list/sound"
+      url="/config.json"
       handle-as="json"
       last-response="{{ajaxResponse}}"
       id="xhr"></iron-ajax>
 
-    <template is="dom-repeat" class="card" items="[[ajaxResponse]]">
+    <template is="dom-repeat" class="" items="[[ajaxResponse]]">
       <paper-button on-click="play" raised class="indigo">{{item.name}}</paper-button>
-      <audio src="http://localhost/sound/{{item.file}}" buffered></audio>
+      <audio src="/sounds/{{item.file}}" buffered></audio>
     </template>
 
   </template>
@@ -49,7 +49,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       }
 
       play(event) {
-        console.log(event.model.children[3]);
         var audio = event.model.children[3];
         audio.play();
       }
