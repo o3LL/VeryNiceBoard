@@ -37,7 +37,7 @@
 /* eslint-disable indent, no-unused-vars, no-multiple-empty-lines, max-nested-callbacks, space-before-function-paren, quotes, comma-spacing */
 'use strict';
 
-var precacheConfig = [["bower_components/webcomponentsjs/custom-elements-es5-adapter.js","e6324a1b9a6f7dbac892a472464088db"],["bower_components/webcomponentsjs/gulpfile.js","5b9593e6c3a2a87a866c1169114c745e"],["bower_components/webcomponentsjs/webcomponents-hi-ce.js","495de81020abfefd4f0e3dcff6b7fd3e"],["bower_components/webcomponentsjs/webcomponents-hi-sd-ce.js","68bc22bcb5543e6caabd1d66dc9e1ca9"],["bower_components/webcomponentsjs/webcomponents-hi.js","0ac538bae69f6beb629d2357350041e7"],["bower_components/webcomponentsjs/webcomponents-lite.js","c89f66cb63a098895f4b1b42eb371673"],["bower_components/webcomponentsjs/webcomponents-loader.js","f13bbbbf647b7922575a7894367ddaaf"],["bower_components/webcomponentsjs/webcomponents-sd-ce.js","c5f6fe397db634cde89f66c2f1bc2f62"],["index.html","8028e6baabef23a712816b1fe81804db"],["manifest.json","4a5f87b36b4eaa71720530757b615764"],["src/my-app.html","61c8fbd65b881a030b14c1302362a2c8"],["src/my-view404.html","f09eda1accf59091686af89ba4b82584"],["src/my-viewhome.html","3c52e611588aaeb57f87620373c34eeb"]];
+var precacheConfig = [["/SoundboardGeneratorindex.html","d827b4770c98199f6877d2ae1f8db19b"],["/SoundboardGeneratorsrc/my-app.html","61c8fbd65b881a030b14c1302362a2c8"],["/SoundboardGeneratorsrc/my-view404.html","f09eda1accf59091686af89ba4b82584"],["/SoundboardGeneratorsrc/my-viewhome.html","3c52e611588aaeb57f87620373c34eeb"]];
 var cacheName = 'sw-precache-v3--' + (self.registration ? self.registration.scope : '');
 
 
@@ -229,7 +229,7 @@ self.addEventListener('fetch', function(event) {
 
     // If shouldRespond is still false, check to see if this is a navigation
     // request, and if so, whether the URL matches navigateFallbackWhitelist.
-    var navigateFallback = 'index.html';
+    var navigateFallback = '/SoundboardGenerator/index.html';
     if (!shouldRespond &&
         navigateFallback &&
         (event.request.mode === 'navigate') &&
