@@ -12,12 +12,13 @@
 
 module.exports = {
   staticFileGlobs: [
-    '/index.html',
-    '/manifest.json',
-    '/sounds',
-    '/bower_components/webcomponentsjs/*',
+    '/SoundboardGenerator/index.html',
+    '/SoundboardGenerator/manifest.json',
+    '/SoundboardGenerator/sounds',
+    '/SoundboardGenerator/bower_components/webcomponentsjs/*',
   ],
-  navigateFallback: 'index.html',
+  navigateFallback: '/SoundboardGenerator/index.html',
+  replacePrefix: "/SoundboardGenerator",
   navigateFallbackWhitelist: [/^(?!.*\.html$|\/data\/).*/],
   runtimeCaching: [
     {
