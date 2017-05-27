@@ -27,7 +27,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
     <iron-ajax
       auto
-      url="/config.json"
+      url="config.json"
       handle-as="json"
       last-response="{{ajaxResponse}}"
       id="xhr"></iron-ajax>
@@ -50,6 +50,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
       play(event) {
         var audio = event.model.children[3];
+        console.log(audio);        
         audio.play();
       }
 
