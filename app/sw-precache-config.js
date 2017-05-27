@@ -14,7 +14,7 @@ module.exports = {
   staticFileGlobs: [
     '/SoundboardGenerator/index.html',
     '/SoundboardGenerator/manifest.json',
-    '/SoundboardGenerator/sounds',
+    '/SoundboardGenerator/sounds/*',
     '/SoundboardGenerator/bower_components/webcomponentsjs/*',
   ],
   navigateFallback: '/SoundboardGenerator/index.html',
