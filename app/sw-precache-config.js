@@ -14,7 +14,21 @@ module.exports = {
   staticFileGlobs: [
     '/index.html',
     '/manifest.json',
+    '/sounds',
     '/bower_components/webcomponentsjs/*',
   ],
   navigateFallback: 'index.html',
+  navigateFallbackWhitelist: [/^(?!.*\.html$|\/data\/).*/],
+  runtimeCaching: [
+    {
+      urlPattern: /\/data\/*\/.*/,
+      handler: 'fastest',
+      options: {
+        cache: {
+          maxEntries: 100,
+          name: 'data-cache'
+        }
+      }
+    }
+  ]
 };

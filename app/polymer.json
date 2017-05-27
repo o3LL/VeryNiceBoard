@@ -6,11 +6,12 @@
     "src/my-view404.html"
   ],
   "sources": [
-    "src/**/*",
-    "images/**/*",
-    "bower.json",
     "sounds/*",
-    "config.json"
+    "config.json",
+    "src/**/*",
+    "sounds/*",
+    "images/**/*",    
+    "bower.json"
   ],
   "extraDependencies": [
     "manifest.json",
@@ -20,6 +21,7 @@
     "rules": ["polymer-2"]
   },
   "builds": [{
+    "addServiceWorker": true,
     "bundle": true,
     "js": {"minify": true},
     "css": {"minify": true},
