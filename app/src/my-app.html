@@ -15,15 +15,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="../bower_components/app-layout/app-header-layout/app-header-layout.html">
 <link rel="import" href="../bower_components/app-layout/app-scroll-effects/app-scroll-effects.html">
 <link rel="import" href="../bower_components/app-layout/app-toolbar/app-toolbar.html">
-<link rel="import" href="../bower_components/app-route/app-location.html">
-<link rel="import" href="../bower_components/app-route/app-route.html">
-<link rel="import" href="../bower_components/iron-pages/iron-pages.html">
 <link rel="import" href="../bower_components/iron-selector/iron-selector.html">
 <link rel="import" href="../bower_components/paper-icon-button/paper-icon-button.html">
-<link rel="import" href="my-icons.html">
-
-<link rel="lazy-import" href="my-viewhome.html">
-<link rel="lazy-import" href="my-view404.html">
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../bower_components/iron-ajax/iron-ajax.html">
+<link rel="import" href="../bower_components/paper-button/paper-button.html">
 
 <dom-module id="my-app">
   <template>
@@ -64,100 +60,77 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         color: black;
         font-weight: bold;
       }
+
+      .header {
+        display: block;
+        background-color: #e1e1e1;
+      }
+
+      .header h1, .header a {
+        display: inline-block;
+        margin: 0 auto;
+      }
+
+      .btn {
+        margin: 10px;
+      }
+
+      .footer {
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+      }
+
+      .center {
+        text-align: center;
+      }
     </style>
-
-    <app-location route="{{route}}"></app-location>
-    <app-route
-        route="{{route}}"
-        pattern="[[rootPattern]]:page"
-        data="{{routeData}}"
-        tail="{{subroute}}"></app-route>
     
-    <a href="https://github.com/MUCHZER/SoundboardGenerator"><img style="z-index: 100; position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/652c5b9acfaddf3a9c326fa6bde407b87f7be0f4/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f6f72616e67655f6666373630302e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_orange_ff7600.png"></a>
+    <div class="header">
+      <h1 class="center">My super soundboard !</h1>
+    </div>
+  
+    <br>
 
-    <app-drawer-layout fullbleed>
-      <!-- Main content -->
-      <app-header-layout has-scrolling-region>
+    <iron-ajax
+    auto
+    url="config.json"
+    handle-as="json"
+    last-response="{{ajaxResponse}}"
+    id="xhr"></iron-ajax>
+    
+    <div>
+      <template is="dom-repeat" class="" items="[[ajaxResponse]]">
+        <paper-button on-click="play" raised class="btn indigo">{{item.name}}</paper-button>
+        <audio src="sounds/{{item.file}}" buffered></audio>
+      </template>
+    </div>
+  
+    <div class="footer">
+      <a class="center" href="https://github.com/MUCHZER/SoundboardGenerator">
+        <p>Github</p>
+      </a>
+    </div>
+</template>
 
-        <app-header slot="header" condenses reveals effects="waterfall">
-          <app-toolbar>
-            <div main-title>My super soundboard !</div>
-          </app-toolbar>
-        </app-header>
-
-        <iron-pages
-            selected="[[page]]"
-            attr-for-selected="name"
-            fallback-selection="view404"
-            role="main">
-          <my-viewhome name="viewhome"></my-viewhome>
-          <my-view404 name="view404"></my-view404>
-        </iron-pages>
-      </app-header-layout>
-    </app-drawer-layout>
-  </template>
 
   <script>
-    class MyApp extends Polymer.Element {
-
+    class MyViewApp extends Polymer.Element {
       static get is() { return 'my-app'; }
-
-      static get properties() {
+      static get properties(){
         return {
-          page: {
-            type: String,
-            reflectToAttribute: true,
-            observer: '_pageChanged',
-          },
-          rootPattern: String,
-          routeData: Object,
-          subroute: String,
-        };
-      }
-
-      static get observers() {
-        return [
-          '_routePageChanged(routeData.page)',
-        ];
-      }
-
-      constructor() {
-        super();
-
-        // Get root pattern for app-route, for more info about `rootPath` see:
-        // https://www.polymer-project.org/2.0/docs/upgrade#urls-in-templates
-        this.rootPattern = (new URL(this.rootPath)).pathname;
-      }
-
-      _routePageChanged(page) {
-        // Polymer 2.0 will call with `undefined` on initialization.
-        // Ignore until we are properly called with a string.
-        if (page === undefined) {
-          return;
+          ajaxResponse: Object
         }
-
-        // If no page was found in the route data, page will be an empty string.
-        // Deault to 'view1' in that case.
-        this.page = page || 'viewhome';
-
-        // Close a non-persistent drawer when the page & route are changed.
       }
 
-      _pageChanged(page) {
-        // Load page import on demand. Show 404 page if fails
-        var resolvedPageUrl = this.resolveUrl('my-' + page + '.html');
-        Polymer.importHref(
-            resolvedPageUrl,
-            null,
-            this._showPage404.bind(this),
-            true);
+      play(event) {
+        var audio = event.model.children[3];
+        console.log(audio);        
+        audio.play();
       }
 
-      _showPage404() {
-        this.page = 'view404';
-      }
     }
 
-    window.customElements.define(MyApp.is, MyApp);
+    window.customElements.define(MyViewApp.is, MyViewApp);
   </script>
 </dom-module>
