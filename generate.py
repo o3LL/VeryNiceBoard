@@ -1,7 +1,7 @@
 #!/usr/bin/python
 import os, json
 
-PATH = '../app/sounds/'
+PATH = 'sounds/'
 
 def askName(item):
     return input("Choose a name for " + item + " :")
@@ -14,6 +14,6 @@ def parse(dir):
 
 dir = os.listdir(PATH)
 obj = parse(dir)
-with open('../app/config.json', 'w') as f:
+with open('./config.json', 'w') as f:
     json.dump(obj, f)
 f.closed

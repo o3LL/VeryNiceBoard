@@ -40,58 +40,24 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         background-color: var(--app-primary-color);
       }
 
-      app-header paper-icon-button {
-        --paper-icon-button-ink-color: white;
-      }
-
-      .drawer-list {
-        margin: 0 20px;
-      }
-
-      .drawer-list a {
-        display: block;
-        padding: 0 16px;
-        text-decoration: none;
-        color: var(--app-secondary-color);
-        line-height: 40px;
-      }
-
-      .drawer-list a.iron-selected {
-        color: black;
-        font-weight: bold;
-      }
-
-      .header {
-        display: block;
-        background-color: #e1e1e1;
-      }
-
-      .header h1, .header a {
-        display: inline-block;
-        margin: 0 auto;
-      }
-
       .btn {
         margin: 10px;
       }
 
-      .footer {
-        position: absolute;
-        bottom: 0;
-        width: 100%;
-      }
-
-      .center {
+      footer {
+        height: 50px;
+        line-height: 50px;
         text-align: center;
+        background-color: #E0E0E0;  
+        font-size: 14px;
       }
     </style>
+    <app-header reveals>
+      <app-toolbar>
+        My super soundboard !
+      </app-toolbar>
+    </app-header> 
     
-    <div class="header">
-      <h1 class="center">My super soundboard !</h1>
-    </div>
-  
-    <br>
-
     <iron-ajax
     auto
     url="config.json"
@@ -99,18 +65,18 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     last-response="{{ajaxResponse}}"
     id="xhr"></iron-ajax>
     
-    <div>
+    
       <template is="dom-repeat" class="" items="[[ajaxResponse]]">
         <paper-button on-click="play" raised class="btn indigo">{{item.name}}</paper-button>
         <audio src="sounds/{{item.file}}" buffered></audio>
       </template>
-    </div>
   
-    <div class="footer">
-      <a class="center" href="https://github.com/MUCHZER/SoundboardGenerator">
-        <p>Github</p>
+    <footer>
+      <a class="pull-right" href="https://github.com/MUCHZER/SoundboardGenerator" tabindex="-1">
+        Github
       </a>
-    </div>
+    </footer>
+    
 </template>
 
 
