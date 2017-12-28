@@ -37,7 +37,7 @@
 /* eslint-disable indent, no-unused-vars, no-multiple-empty-lines, max-nested-callbacks, space-before-function-paren, quotes, comma-spacing */
 'use strict';
 
-var precacheConfig = [["/SoundboardGenerator/index.html","e170734d245fd296154a17c565f02c78"],["/SoundboardGenerator/src/my-app.html","e59ca4120a252ef63c3e1fc91d0e86b3"],["/SoundboardGenerator/src/my-view404.html","e6858877d6e78ecaa4edb943ade0ac71"],["/SoundboardGenerator/src/my-viewhome.html","43d6ed00032bdc9e435a0cdd92cf833a"]];
+var precacheConfig = [["/SoundboardGenerator/index.html","7aaf38f5f64705789eecd6bc15e113a3"],["/SoundboardGenerator/src/my-app.html","0d0a8ff3848017f2a8c8fd53133108cc"]];
 var cacheName = 'sw-precache-v3--' + (self.registration ? self.registration.scope : '');
 
 
