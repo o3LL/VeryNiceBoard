@@ -2,6 +2,7 @@
 
 ## Description
 This is a Polymer interface for soundboard using a Python config generator.
+You can try the demo : https://muchzer.github.io/SoundboardGenerator/
 
 ## Required
 - Python 3.x
