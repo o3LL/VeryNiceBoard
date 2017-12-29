@@ -20356,24 +20356,28 @@ Custom property | Description | Default
 </dom-module>
 </div><dom-module id="my-app">
   <template>
-    <style>:host{--app-primary-color:#4285f4;--app-secondary-color:black;display:block;}app-drawer-layout:not([narrow]) [drawer-toggle]{display:none;}app-header{color:#fff;background-color:var(--app-primary-color);}.btn{margin:10px;}footer{height:50px;line-height:50px;text-align:center;background-color:#E0E0E0;font-size:14px;}</style>
+    <style>:host{--app-primary-color:rgb(59, 59, 59);--app-secondary-color:#4a9433;display:block;margin-bottom:50px;}paper-button.green{background-color:#4a9433;color:white;transition:all 1s ease-out;}paper-button.green[active]{background-color:#1f550e;}app-drawer-layout:not([narrow]) [drawer-toggle]{display:none;}app-header{color:#fff;background-color:var(--app-primary-color);}.btn{margin:10px;}footer{height:50px;background-color:rgb(59, 59, 59);font-size:14px;bottom:0;position:fixed;width:100%;}footer a{position:absolute;color:white;text-decoration:none;font-size:0.7em;}footer .left{right:0;}footer .center{text-align:center;width:100%;line-height:50px;}footer img{margin:10px;}.playing{background-color:#05330b !important;transition:all 1s ease-out;}</style>
     <app-header reveals="">
       <app-toolbar>
-        My super soundboard !
+        MisterMV &amp; Zerator Soundbox
       </app-toolbar>
     </app-header> 
     
     <iron-ajax auto="" url="config.json" handle-as="json" last-response="{{ajaxResponse}}" id="xhr"></iron-ajax>
     
-    
-      <template is="dom-repeat" class="" items="[[ajaxResponse]]">
-        <paper-button on-click="play" raised="" class="btn indigo">{{item.name}}</paper-button>
-        <audio src="sounds/{{item.file}}" buffered=""></audio>
-      </template>
+    <template is="dom-repeat" class="" items="[[ajaxResponse]]">
+      <paper-button on-click="play" raised="" class="btn green" playing="false">
+        {{item.name}}
+        <audio id="audio_{{index}}" src="sounds/{{item.file}}" buffered=""></audio> 
+      </paper-button>
+    </template>
   
     <footer>
-      <a class="pull-right" href="https://github.com/MUCHZER/SoundboardGenerator" tabindex="-1">
-        Github
+      <a class="left" href="https://github.com/MUCHZER/SoundboardGenerator" tabindex="-1">
+        <img src="../images/github.png" alt="">
+      </a>
+      <a class="center" href="https://muchzer.fr/">
+        made by muchzer
       </a>
     </footer>
     
@@ -20390,9 +20394,24 @@ Custom property | Description | Default
       }
 
       play(event) {
-        var audio = event.model.children[3];
-        console.log(audio);        
-        audio.play();
+        /*
+        * TODO
+        * Possible settings :
+        * cutself - Cut other sound when playing a new one
+        * volume - Volume (o rly)
+        * ...
+        */
+
+        var index = event.model.__data.index;
+        var audio = Polymer.dom(this.root).querySelector(`#audio_${index}`);
+         
+        audio.play().then(() => {
+          event.model.children[1].classList.add('playing');
+        })
+        
+        audio.onended = () => {
+          event.model.children[1].classList.remove('playing');
+        };
       }
 
     }
