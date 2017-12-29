@@ -1,10 +1,6 @@
 {
   "entrypoint": "index.html",
   "shell": "src/my-app.html",
-  "fragments": [
-    "src/my-viewhome.html",
-    "src/my-view404.html"
-  ],
   "sources": [
     "sounds/*",
     "config.json",
