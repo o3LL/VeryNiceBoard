@@ -37,7 +37,7 @@
 /* eslint-disable indent, no-unused-vars, no-multiple-empty-lines, max-nested-callbacks, space-before-function-paren, quotes, comma-spacing */
 'use strict';
 
-var precacheConfig = [["/SoundboardGenerator/index.html","9d818514d994a50dec0ec8b771875759"],["/SoundboardGenerator/src/my-app.html","4998f7104edfcca099059bc9861b1258"]];
+var precacheConfig = [["/VeryNiceBoard/index.html","9d818514d994a50dec0ec8b771875759"],["/VeryNiceBoard/src/my-app.html","4998f7104edfcca099059bc9861b1258"]];
 var cacheName = 'sw-precache-v3--' + (self.registration ? self.registration.scope : '');
 
 
