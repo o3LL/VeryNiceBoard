@@ -104,7 +104,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     id="xhr"></iron-ajax>
     
     <template is="dom-repeat" class="" items="[[ajaxResponse]]">
-      <paper-button on-click="play" raised class="btn green" playing="false">
+      <paper-button on-click="send" raised class="btn green" playing="false">
         {{item.name}}
         <audio id="audio_{{index}}" src="sounds/{{item.file}}" buffered></audio> 
       </paper-button>
@@ -131,7 +131,21 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         }
       }
 
-      play(event) {
+      ready() {
+        super.ready();
+        let ip = 'ws://192.168.1.15:8080';        
+        this.ws = new WebSocket(ip);
+        this.ws.onmessage = e => this._play(e);
+        
+      }
+
+      send(event) {
+        var index = event.model.__data.index;        
+
+        this.ws.send(index);
+      }
+
+      _play(id) {
         /*
         * TODO
         * Possible settings :
@@ -140,15 +154,16 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         * ...
         */
 
-        var index = event.model.__data.index;
-        var audio = Polymer.dom(this.root).querySelector(`#audio_${index}`);
-         
+        console.log(id)
+        var audio = Polymer.dom(this.root).querySelector(`#audio_${id.data}`);
+        
+        console.log(audio);
         audio.play().then(() => {
-          event.model.children[1].classList.add('playing');
+          audio.__shady.parentNode.classList.add('playing');
         })
         
         audio.onended = () => {
-          event.model.children[1].classList.remove('playing');
+          audio.__shady.parentNode.classList.remove('playing');
         };
       }
 
