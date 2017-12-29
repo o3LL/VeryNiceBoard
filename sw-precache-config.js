@@ -18,7 +18,7 @@ module.exports = {
     '/SoundboardGenerator/bower_components/webcomponentsjs/*',
   ],
   navigateFallback: '/SoundboardGenerator/index.html',
-  replacePrefix: "/SoundboardGenerator",
+  replacePrefix: "/SoundboardGenerator/",
   navigateFallbackWhitelist: [/^(?!.*\.html$|\/data\/).*/],
   runtimeCaching: [
     {
