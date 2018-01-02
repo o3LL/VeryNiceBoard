@@ -23,7 +23,7 @@ wss.on('connection', function connection(ws) {
         ws.id = id; 
 
     ws.on('message', function incoming(message) {
-        console.log("Playing :", message);
+        console.log("Playing :", message, " from ",  ws._socket.remoteAddress);
         for (conn in all_active_connections)
             all_active_connections[conn].send(message.toString());
     });
@@ -32,6 +32,8 @@ wss.on('connection', function connection(ws) {
         console.log('Disconnected');
         delete all_active_connections[ws.id];
     });
+
+    ws.on('error', (e) => console.log('errored : ', e));
   });
 
   server.listen(8080, function listening() {
