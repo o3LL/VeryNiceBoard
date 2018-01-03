@@ -103,12 +103,17 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     last-response="{{ajaxResponse}}"
     id="xhr"></iron-ajax>
     
-    <template is="dom-repeat" class="" items="[[ajaxResponse]]">
-      <paper-button on-click="send" raised class="btn green" playing="false">
-        {{item.name}}
-        <audio id="audio_{{index}}" src="sounds/{{item.file}}" buffered></audio> 
-      </paper-button>
-    </template>
+    <input type="text" hidden="{{!hide}}">
+    <button type="button" on-click="toggle" hidden="{{!hide}}">Submit</button>
+
+    <content hidden="{{hide}}">
+      <template is="dom-repeat" class="" items="[[ajaxResponse]]">
+        <paper-button on-click="send" raised class="btn green" playing="false">
+          {{item.name}}
+          <audio id="audio_{{index}}" src="sounds/{{item.file}}" buffered></audio> 
+        </paper-button>
+      </template>
+    </content>
   
     <footer>
       <a class="left" href="https://github.com/MUCHZER/SoundboardGenerator" tabindex="-1">
@@ -127,7 +132,13 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       static get is() { return 'my-app'; }
       static get properties(){
         return {
-          ajaxResponse: Object
+          ajaxResponse: Object,
+          hide: {
+            type: Boolean,
+            notify: true,
+            reflectToAttribute: true,
+            value: true
+          },
         }
       }
 
@@ -136,7 +147,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         let ip = 'ws://192.168.1.15:8080';        
         this.ws = new WebSocket(ip);
         this.ws.onmessage = e => this._play(e);
-        
+      }
+
+      toggle() {
+        this.hide = !this.hide;
       }
 
       send(event) {
